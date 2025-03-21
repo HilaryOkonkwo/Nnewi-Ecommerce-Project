@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">E-Shop</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="/seller">Seller</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="seller">
+        <div class="container">
+            <h2>Seller Page</h2>
+            <form action="/add-product" method="post">
+                <div>
+                    <label for="name">Product Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="price">Product Price:</label>
+                    <input type="number" id="price" name="price" required>
+                </div>
+                <div>
+                    <label for="amount">Product Amount:</label>
+                    <input type="number" id="amount" name="amount" required>
+                </div>
+                <button type="submit" class="btn">Add Product</button>
+            </form>
+
+            <h3>Existing Products</h3>
+            <ul>
+                <% products.forEach(product=> { %>
+                    <li>
+                        <%= product.name %> - $<%= product.price %> - <%= product.amount %> units
+                                    <form action="/delete-product" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                        <button type="submit" class="btn">Delete</button>
+                                    </form>
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 E-Shop. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
