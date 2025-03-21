@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <!-- Logo -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-red-600">Farmart</h1>
+        </div>
+
+        <!-- Title -->
+        <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+
+        <!-- Form -->
+        <form action="#" method="POST" class="space-y-4">
+         
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2" for="email">Email or Mobile Number*</label>
+                <input type="text" id="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email or phone number">
+            </div>
+            <div class="mb-6 mt-4">
+                <label class="block text-sm font-medium mb-2" for="password">Password</label>
+                <input type="password" id="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your password">
+            </div>
+            <a href="#" class="block text-blue-600 hover:underline mb-6">Forgot Password?</a>
+            <button type="submit" class="w-full bg-yellow-500 text-white px-3 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 drop-shadow-lg">Login</button>
+            
+        <p class="text-sm text-gray-600 mt-4">By continuing you agree to Farmat’s <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a></p>
+
+        <div class="flex items-center my-4">
+            <hr class="flex-grow border-gray-300">
+            <span class="px-3 text-gray-500">OR</span>
+            <hr class="flex-grow border-gray-300">
+        </div>
+        <div class="mt-6">
+            <button class="w-full text-gray-700 gap-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 flex items-center justify-center">
+                <a href="#" class="text-blue-500 hover:text-gray-400 drop-shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.35c0 .732.593 1.325 1.325 1.325h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.732 0 1.325-.593 1.325-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                    </svg>
+                </a> Log in with Facebook
+            </button>
+            <button class=" mt-3 w-full flex items-center justify-center gap-2 border border-gray-300 rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-100">
+                <img src="https://www.svgrepo.com/show/303108/google-icon-logo.svg" class="w-5 h-5" alt="Google">
+                Login with Google
+            </button>
+        </div>
+        <p class="mt-4 text-center text-gray-600">
+            Don’t have an account? 
+            <a href="#" class="text-purple-600 font-semibold hover:underline">Sign Up</a>
+        </p>
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">For further support, you may visit the <a href="#" class="text-blue-600 hover:underline">Help Center</a> or contact our <a href="#" class="text-blue-600 hover:underline">customer service team</a>.</p>
+        </div>
+ 
+            </form>
+            </div>
+    
+</body>
+</html>
