@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: lightcyan;
+        }
+
+        .orders {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .orders h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .orders table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .orders th, .orders td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .orders th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .orders tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .orders tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .orders button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .orders button:hover {
+            background-color: #0056b3;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .status.shipped {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 600px) {
+            .orders table, .orders thead, .orders tbody, .orders th, .orders td, .orders tr {
+                display: block;
+            }
+
+            .orders thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .orders tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .orders td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+
+            .orders td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+
+            .orders td:nth-of-type(1):before { content: "Order ID"; }
+            .orders td:nth-of-type(2):before { content: "Customer"; }
+            .orders td:nth-of-type(3):before { content: "Date"; }
+            .orders td:nth-of-type(4):before { content: "Total"; }
+            .orders td:nth-of-type(5):before { content: "Status"; }
+            .orders td:nth-of-type(6):before { content: "Action"; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orders">
+        <h2>Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Order ID">#12345</td>
+                    <td data-label="Customer">John Doe</td>
+                    <td data-label="Date">2023-10-01</td>
+                    <td data-label="Total">$50.00</td>
+                    <td data-label="Status"><span class="status shipped">Shipped</span></td>
+                    <td data-label="Action"><button>View</button></td>
+                </tr>
+                <tr>
+                    <td data-label="Order ID">#12346</td>
+                    <td data-label="Customer">Jane Smith</td>
+                    <td data-label="Date">2023-09-30</td>
+                    <td data-label="Total">$30.00</td>
+                    <td data-label="Status"><span class="status pending">Pending</span></td>
+                    <td data-label="Action"><button>View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

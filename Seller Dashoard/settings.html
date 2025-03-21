@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #50889b;
+        }
+
+        .settings {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .settings h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .settings form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .settings input[type="text"],
+        .settings input[type="file"],
+        .settings select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .settings button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .settings button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .settings {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings">
+        <h2>Settings</h2>
+        <form>
+            <label for="store-name">Store Name:</label>
+            <input type="text" id="store-name" value="My Store" />
+            <label for="store-logo">Store Logo:</label>
+            <input type="file" id="store-logo" />
+            <label for="payment-gateway">Payment Gateway:</label>
+            <select id="payment-gateway">
+                <option value="stripe">Stripe</option>
+                <option value="paypal">PayPal</option>
+            </select>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

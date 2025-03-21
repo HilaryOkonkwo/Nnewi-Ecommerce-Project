@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: rgb(219, 138, 15);
+        }
+
+        .products {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .products button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .products button:hover {
+            background-color: #0056b3;
+        }
+
+        .products table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .products th, .products td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .products th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .products tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .products tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .products tbody button {
+            background-color: #28a745;
+            margin: 5px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .products tbody button:last-child {
+            background-color: #dc3545;
+        }
+
+        .products tbody button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .products table, .products thead, .products tbody, .products th, .products td, .products tr {
+                display: block;
+            }
+
+            .products thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .products tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .products td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+
+            .products td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+
+            .products td:nth-of-type(1):before { content: "Product Name"; }
+            .products td:nth-of-type(2):before { content: "Price"; }
+            .products td:nth-of-type(3):before { content: "Stock"; }
+            .products td:nth-of-type(4):before { content: "Category"; }
+            .products td:nth-of-type(5):before { content: "Action"; }
+        }
+    </style>
+</head>
+<body>
+    <div class="products">
+        <h2>Products</h2>
+        <button>Add New Product</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Product Name">Product 1</td>
+                    <td data-label="Price">$50.00</td>
+                    <td data-label="Stock">100</td>
+                    <td data-label="Category">Electronics</td>
+                    <td data-label="Action"><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td data-label="Product Name">Product 2</td>
+                    <td data-label="Price">$30.00</td>
+                    <td data-label="Stock">50</td>
+                    <td data-label="Category">Fashion</td>
+                    <td data-label="Action"><button>Edit</button> <button>Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
