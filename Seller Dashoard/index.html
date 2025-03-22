@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    /> 
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">My Store</div>
+          <ul class="nav-links">
+            <li><a href="./overview.html" class="active">Overview</a></li>
+            <li><a href="./orders.html">Orders</a></li>
+            <li><a href="./products.html">Products</a></li>
+            <li><a href="./customers.html">Customers</a></li>
+            <li><a href="./analytics.html">Analytics</a></li>
+            <li><a href="./settings.html">Settings</a></li>
+          </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <header>
+          <h1>Overview</h1>
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+          </div>
+          <div class="user-profile">
+            <img src="./user-3-fill.png" alt="Profile Picture" />
+            <span>Admin</span>
+          </div>
+        </header>
+
+        <!-- Key Metrics -->
+        <div class="metrics">
+          <div class="metric-card">
+            <h3>Total Sales</h3>
+            <p>$12,345</p>
+          </div>
+          <div class="metric-card">
+            <h3>Orders</h3>
+            <p>1,234</p>
+          </div>
+          <div class="metric-card">
+            <h3>Customers</h3>
+            <p>567</p>
+          </div>
+        </div>
+
+        <!-- Sales Chart -->
+         <!-- <div class="chart">
+          <h2>Sales Trends</h2>
+          <canvas id="salesChart"></canvas>
+        </div>  -->
+
+        <!-- Recent Orders -->
+        <div class="recent-orders">
+          <h2>Recent Orders</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#12345</td>
+                <td>John Doe</td>
+                <td>2023-10-01</td>
+                <td><span class="status shipped">Shipped</span></td>
+                <td><button>View</button></td>
+              </tr>
+              <tr>
+                <td>#12346</td>
+                <td>Jane Smith</td>
+                <td>2023-09-30</td>
+                <td><span class="status pending">Pending</span></td>
+                <td><button>View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

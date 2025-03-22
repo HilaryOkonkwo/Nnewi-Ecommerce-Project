@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #34587ea2;
+        }
+
+        .customers {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .customers h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .customers table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .customers th, .customers td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .customers th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .customers tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .customers tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .customers button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .customers button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .customers table, .customers thead, .customers tbody, .customers th, .customers td, .customers tr {
+                display: block;
+            }
+
+            .customers thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .customers tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .customers td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+
+            .customers td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+
+            .customers td:nth-of-type(1):before { content: "Name"; }
+            .customers td:nth-of-type(2):before { content: "Email"; }
+            .customers td:nth-of-type(3):before { content: "Total Orders"; }
+            .customers td:nth-of-type(4):before { content: "Total Spent"; }
+            .customers td:nth-of-type(5):before { content: "Action"; }
+        }
+    </style>
+</head>
+<body>
+    <div class="customers">
+        <h2>Customers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Total Orders</th>
+                    <th>Total Spent</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Name">John Doe</td>
+                    <td data-label="Email">john@example.com</td>
+                    <td data-label="Total Orders">5</td>
+                    <td data-label="Total Spent">$250.00</td>
+                    <td data-label="Action"><button>View</button></td>
+                </tr>
+                <tr>
+                    <td data-label="Name">Jane Smith</td>
+                    <td data-label="Email">jane@example.com</td>
+                    <td data-label="Total Orders">3</td>
+                    <td data-label="Total Spent">$150.00</td>
+                    <td data-label="Action"><button>View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

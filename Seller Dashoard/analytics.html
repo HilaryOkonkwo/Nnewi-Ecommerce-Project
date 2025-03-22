@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #dea70e;
+        }
+
+        .analytics {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .analytics h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .analytics .chart {
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+        }
+
+        .analytics .chart h3 {
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        #salesChart, #customerChart {
+            width: 100%;
+            height: 300px;
+        }
+
+        @media (max-width: 600px) {
+            .analytics {
+                width: 95%;
+            }
+
+            #salesChart, #customerChart {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="analytics">
+        <h2>Analytics</h2>
+        <div class="chart">
+            <h3>Sales Over Time</h3>
+            <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart">
+            <h3>Customer Demographics</h3>
+            <canvas id="customerChart"></canvas>
+        </div>
+    </div>
+</body>
+</html>
