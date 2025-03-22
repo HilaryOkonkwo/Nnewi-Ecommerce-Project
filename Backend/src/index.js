@@ -1,41 +1,39 @@
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import session from 'express-session';
+import path from 'path';
+import bcrypt from 'bcrypt';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from '../config/db.js';
 import router from '../models/models.js';
 
 dotenv.config();
 
-// Simulate __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Defining the express app
 const app = express();
+app.set('Frontend', path.join('../../Frontend'));
 
+// const router = express.Router();
+
+
+// Serve static files from the frontend folder
+app.use(express.static(path.join('../../Frontend')));
+
+// Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Set up session middleware
 app.use(session({
-    secret: 'your_secret_key',
+    secret: '_secret_key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true } // Set to true if using HTTPS
 }));
 
-// Use ejs as a view engine
-app.set('views', path.join(__dirname, '../views')); // Corrected path
-app.set('view engine', 'ejs');
-
 // static files
-app.use(express.static('../public'));
+app.use(express.static(path.join('../../Frontend')));
 
 // Set up static directory for public files
-
-console.log("Views Directory:", app.get('views'));
+console.log("Views Directory:", app.get('Frontend'));
 
 // Use the router
 app.use('/', router);

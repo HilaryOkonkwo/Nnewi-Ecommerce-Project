@@ -1,59 +1,58 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
-import { User, Product } from '../src/config.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { User, Product } from '../src/config.js'; // Import your models
 
 const router = express.Router();
 
-// Add login route
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 router.get('/', (req, res) => {
-    res.render('login');
+    res.sendFile(path.join(__dirname, '../../Frontend/index.html'));
 });
 
+// Add login route
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.sendFile(path.join(__dirname, '../../Frontend/login.html'));
 });
 
 // Add signup route
 router.get('/signup', (req, res) => {
-    res.render('signup');
+    res.sendFile(path.join(__dirname, '../../Frontend/signup.html'));
 });
 
 // Add cart route
 router.get('/cart', (req, res) => {
     const cart = req.session.cart || [];
-    res.render('cart', { cart });
+    res.json({ cart });
 });
 
 // Seller page route
 router.get('/seller', async (req, res) => {
     try {
         const products = await Product.find();
-        res.render('seller', { products });
+        res.json({ products });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send({ message: 'Internal Server Error' });
     }
 });
 
 router.post("/signup", async (req, res) => {
     const data = {
-        username: req.body.username, // Ensure this matches the form field name
         firstname: req.body.firstName,
         lastname: req.body.lastName,
         email: req.body.email,
         phone: req.body.phone,
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        dob: req.body.dob,
         password: req.body.password
     };
 
     // checking if user exists
-    const existingUser = await User.findOne({ username: data.username });
+    const existingUser = await User.findOne({ email: data.email });
 
     if (existingUser) {
-        res.send("User already exists. Choose a different name");
+        return res.status(400).send({ message: "User with this email already exists. Choose a different email." });
     } else {
         // hash the password using bcrypt
         const saltRounds = 10;
@@ -63,33 +62,35 @@ router.post("/signup", async (req, res) => {
 
         const userdata = await User.create(data);
         console.log(userdata);
-        res.send("User registered successfully");
+        return res.status(201).send({ message: "User registered successfully" });
     }
 });
 
 // login user
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
-        const check = await User.findOne({ username: req.body.username });
+        const check = await User.findOne({
+            $or: [
+                { email: req.body.email },
+                { phone: req.body.phone }
+            ]
+        });
+
         if (!check) {
-            // return res.send("User name cannot be found. Please try another name") // this one returns a full page
-
-            return res.json({ success: false, message: "User name cannot be found. Please try another name." }) // returns a toast
-        };
-
-        // compare the password from database
-        const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
-
-        if (isPasswordMatch) {
-            // return res.render("home");
-            return res.json({ success: true, message: "Logged in successfully." })
-        } else {
-            // return res.send("wrong password");
-            return res.json({ success: false, message: "Wrong password" });
+            return res.status(400).send({ message: "User not found" });
         }
-    } catch {
-        // return res.send("Wrong details")
-        return res.json({ success: false, message: "An error occured, please try again." })
+
+        const validPassword = await bcrypt.compare(req.body.password, check.password);
+
+        if (validPassword) {
+            req.session.user = check;
+            return res.send({ message: "Logged in successfully" });
+        } else {
+            return res.status(400).send({ message: "Invalid password" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Internal Server Error" });
     }
 });
 
@@ -104,7 +105,7 @@ router.post('/add-to-cart', (req, res) => {
     }
 
     req.session.cart.push({ id: productId, name: productName, price: productPrice });
-    res.send('Product added to cart');
+    res.send({ message: 'Product added to cart' });
 });
 
 // Add product route
@@ -112,14 +113,14 @@ router.post('/add-product', async (req, res) => {
     const { name, price, amount } = req.body;
     const product = new Product({ name, price, amount });
     await product.save();
-    res.redirect('/seller');
+    res.send({ message: 'Product added successfully' });
 });
 
 // Delete product route
 router.post('/delete-product', async (req, res) => {
     const { productId } = req.body;
     await Product.findByIdAndDelete(productId);
-    res.redirect('/seller');
+    res.send({ message: 'Product deleted successfully' });
 });
 
 export default router;

@@ -4,7 +4,22 @@ const { Schema } = mongoose;
 
 // Create a schema
 const userSchema = new mongoose.Schema({
-    username: {
+    firstName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    lastName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    phoneNumber: {
         type: String,
         required: true,
         unique: true
