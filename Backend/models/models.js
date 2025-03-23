@@ -42,32 +42,68 @@ router.get('/seller', async (req, res) => {
     }
 });
 
-router.post("/signup", async (req, res) => {
-    const data = {
-        firstname: req.body.firstName,
-        lastname: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: req.body.password
-    };
+////////////////////////////////////////////////////////////////
 
-    // checking if user exists
-    const existingUser = await User.findOne({ email: data.email });
+// router.post("/signup", async (req, res) => {
+//     const data = {
+//         firstname: req.body.firstName,
+//         lastname: req.body.lastName,
+//         email: req.body.email,
+//         phone: req.body.phone,
+//         password: req.body.password
+//     };
 
-    if (existingUser) {
-        return res.status(400).json({ message: "User with this email already exists. Choose a different email." });
-    } else {
-        // hash the password using bcrypt
+//     // checking if user exists
+//     const existingUser = await User.findOne({ email: data.email });
+
+//     if (existingUser) {
+//         return res.status(400).json({ message: "User with this email already exists. Choose a different email." });
+//     } else {
+//         // hash the password using bcrypt
+//         const saltRounds = 10;
+//         const hashPassword = await bcrypt.hash(data.password, saltRounds);
+
+//         data.password = hashPassword;
+
+//         const userdata = await User.create(data);
+//         console.log(userdata);
+//         return res.status(201).json({ message: "User registered successfully" });
+//     }
+// });
+////////////////////////////////////////////////////////
+
+//Refactoring the signup route
+router.post("/signip", async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, password } = req.body;
+
+        //  Checking if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this email already exists. Choose a different email." });
+        }
+
+        // Hash the password using bcrypt
         const saltRounds = 10;
-        const hashPassword = await bcrypt.hash(data.password, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        data.password = hashPassword;
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            phone,
+            password: hashedPassword
+        });
 
-        const userdata = await User.create(data);
-        console.log(userdata);
-        return res.status(201).json({ message: "User registered successfully" });
+        await newUser.save();
+        return res.status(201).json({ message: "User registered successfully." })
+    } catch (error) {
+        console.error("Signup error:", error);
+        return res.status(500).json({ message: "Signup Failed.", error: error.message })
     }
-});
+})
+
+////////////////////////////////////////////////
 
 // login user
 router.post('/login', async (req, res) => {

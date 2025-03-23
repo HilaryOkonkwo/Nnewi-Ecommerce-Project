@@ -3,6 +3,7 @@ import session from 'express-session';
 import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { User, Product } from '../src/config.js'; // Import your models
 import { connectDB } from '../config/db.js';
 import router from '../models/models.js';
 import { fileURLToPath } from 'url';
@@ -37,6 +38,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 }));
+
+
 
 
 // Set up static directory for public files
