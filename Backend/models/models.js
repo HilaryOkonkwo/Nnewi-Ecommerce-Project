@@ -73,9 +73,14 @@ router.get('/seller', async (req, res) => {
 ////////////////////////////////////////////////////////
 
 //Refactoring the signup route
-router.post("/signip", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const { firstName, lastName, email, phone, password } = req.body;
+
+        if (!phone) {
+            return res.status(400).json({ message: "Phone number is required." });
+        }
+
 
         //  Checking if user already exists
         const existingUser = await User.findOne({ email });
