@@ -1,12 +1,15 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import bcrypt from 'bcrypt';
 import { User, Product } from '../src/config.js'; // Import your models
 
 const router = express.Router();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+console.log("__dirname:", __dirname)
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../Frontend/index.html'));
@@ -35,7 +38,7 @@ router.get('/seller', async (req, res) => {
         res.json({ products });
     } catch (error) {
         console.error(error);
-        res.status(500).send({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
@@ -52,7 +55,7 @@ router.post("/signup", async (req, res) => {
     const existingUser = await User.findOne({ email: data.email });
 
     if (existingUser) {
-        return res.status(400).send({ message: "User with this email already exists. Choose a different email." });
+        return res.status(400).json({ message: "User with this email already exists. Choose a different email." });
     } else {
         // hash the password using bcrypt
         const saltRounds = 10;
@@ -62,7 +65,7 @@ router.post("/signup", async (req, res) => {
 
         const userdata = await User.create(data);
         console.log(userdata);
-        return res.status(201).send({ message: "User registered successfully" });
+        return res.status(201).json({ message: "User registered successfully" });
     }
 });
 
@@ -77,14 +80,14 @@ router.post('/login', async (req, res) => {
         });
 
         if (!check) {
-            return res.status(400).send({ message: "User not found" });
+            return res.status(400).json({ message: "User not found" });
         }
 
         const validPassword = await bcrypt.compare(req.body.password, check.password);
 
         if (validPassword) {
             req.session.user = check;
-            return res.send({ message: "Logged in successfully" });
+            return res.json({ message: "Logged in successfully" });
         } else {
             return res.status(400).send({ message: "Invalid password" });
         }
