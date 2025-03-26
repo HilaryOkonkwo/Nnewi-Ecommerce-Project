@@ -75,9 +75,9 @@ router.get('/seller', async (req, res) => {
 //Refactoring the signup route
 router.post("/signup", async (req, res) => {
     try {
-        const { firstName, lastName, email, phone, password } = req.body;
+        const { firstName, lastName, email, phoneNumber, password } = req.body;
 
-        if (!phone) {
+        if (!phoneNumber) {
             return res.status(400).json({ message: "Phone number is required." });
         }
 
@@ -96,12 +96,12 @@ router.post("/signup", async (req, res) => {
             firstName,
             lastName,
             email,
-            phone,
+            phoneNumber,
             password: hashedPassword
         });
 
         await newUser.save();
-        return res.status(201).json({ message: "User registered successfully." })
+        return res.status(201).json({ message: "User registered successfully.", redirect: '/login' });
     } catch (error) {
         console.error("Signup error:", error);
         return res.status(500).json({ message: "Signup Failed.", error: error.message })
