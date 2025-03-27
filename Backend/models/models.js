@@ -78,6 +78,7 @@ router.post("/signup", async (req, res) => {
     try {
         console.log("Request Body:", req.body);
         console.log("Email:", req.body.email);
+        console.log("phoneNumber:", req.body.phoneNumber);
 
 
         const { firstName, lastName, email, phoneNumber, password } = req.body;
@@ -138,7 +139,7 @@ router.post('/login', async (req, res) => {
 
         if (validPassword) {
             req.session.User = check;
-            return res.json({ message: "Logged in successfully", redirect: '/Landing Page' });
+            return res.json({ message: "Logged in successfully", redirect: 'Landing Page.html' });
         } else {
             return res.status(400).send({ message: "Invalid password" });
         }
