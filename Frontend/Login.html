@@ -30,10 +30,15 @@
             </div>
             <div class="mb-6 mt-4">
                 <label class="block text-sm font-medium mb-2" for="password">Password</label>
-                <input type="password" name="password" id="password"
+                <input type="password" name="password" id="password myInput"
                     class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your password">
             </div>
+
+
+            <!-- An element to toggle between password visibility --><input type="checkbox" onclick="myFunction()">Show
+            Password
+
             <a href="#" class="block text-blue-600 hover:underline mb-6">Forgot Password?</a>
             <button type="submit"
                 class="w-full bg-yellow-500 text-white px-3 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 drop-shadow-lg">Login</button>
@@ -76,5 +81,15 @@
     </div>
 
 </body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 </html>

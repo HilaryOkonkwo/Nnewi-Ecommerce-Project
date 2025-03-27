@@ -1,4 +1,5 @@
 import express from 'express';
+// import session from 'express-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcrypt';
@@ -75,6 +76,10 @@ router.get('/seller', async (req, res) => {
 //Refactoring the signup route
 router.post("/signup", async (req, res) => {
     try {
+        console.log("Request Body:", req.body);
+        console.log("Email:", req.body.email);
+
+
         const { firstName, lastName, email, phoneNumber, password } = req.body;
 
         if (!phoneNumber) {
@@ -101,10 +106,10 @@ router.post("/signup", async (req, res) => {
         });
 
         await newUser.save();
-        return res.status(201).json({ message: "User registered successfully.", redirect: '/login' });
+        return res.json({ message: "User registered successfully.", redirect: '/login' });
     } catch (error) {
         console.error("Signup error:", error);
-        return res.status(500).json({ message: "Signup Failed.", error: error.message })
+        return res.json({ message: "Signup Failed.", error: error.message })
     }
 })
 
@@ -113,10 +118,15 @@ router.post("/signup", async (req, res) => {
 // login user
 router.post('/login', async (req, res) => {
     try {
+
+        console.log("Email:", req.body.email);
+        console.log("Phone:", req.body.phoneNumber);
+        console.log("Password:", req.body.password);
+
         const check = await User.findOne({
             $or: [
                 { email: req.body.email },
-                { phone: req.body.phone }
+                { phoneNumber: req.body.phoneNumber }
             ]
         });
 
@@ -127,8 +137,8 @@ router.post('/login', async (req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, check.password);
 
         if (validPassword) {
-            req.session.user = check;
-            return res.json({ message: "Logged in successfully" });
+            req.session.User = check;
+            return res.json({ message: "Logged in successfully", redirect: '/Landing Page' });
         } else {
             return res.status(400).send({ message: "Invalid password" });
         }

@@ -20,7 +20,7 @@
         <h2 class="text-2xl font-bold text-center mb-6">Create An Account</h2>
 
         <!-- Form -->
-        <form action="/signup" method="POST" class="space-y-4">
+        <form action="/signup" method="POST" class="space-y-4" id="signupForm">
 
             <!-- First Name -->
             <div>
@@ -46,16 +46,19 @@
             <!-- Phone Number -->
             <div>
                 <label class="block text-gray-700 font-medium">Phone Number</label>
-                <input type="tel" name="phoneNumber" id="phone" placeholder="Enter Phone Number"
+                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number"
                     class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-red-300 focus:outline-none">
             </div>
 
             <!-- Password -->
             <div>
                 <label class="block text-gray-700 font-medium">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter Password"
+                <input type="password" name="password" id="password myInput" placeholder="Enter Password"
                     class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring focus:ring-red-300 focus:outline-none">
             </div>
+
+            <!-- An element to toggle between password visibility -->
+            <input type="checkbox" onclick="myFunction()">Show Password
 
 
             <button type="submit"
@@ -83,5 +86,16 @@
     </div>
 
 </body>
+<script src="redirect.js"></script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 </html>

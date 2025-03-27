@@ -17,9 +17,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.set('Frontend', path.join('../../Frontend'));
 
-// const router = express.Router();
-
-
 // Serve static files from the frontend folder
 console.log(__dirname);
 app.use(express.static(path.join('../../Frontend')));
@@ -30,9 +27,9 @@ console.log("Views Directory:", app.get('Frontend'));
 
 
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: '_secret_key',
     resave: false,
